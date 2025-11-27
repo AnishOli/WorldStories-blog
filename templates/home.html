@@ -1,0 +1,248 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Django Blog</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/blog.css'%}">
+     <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .top-bar {
+            background-color: #fff;
+            padding: 10px 0;
+            border-bottom: 1px solid #dee2e6;
+        }
+        .blog-name {
+            font-weight: 700;
+            color: #333;
+            text-decoration: none;
+            font-size: 2.25rem;
+        }
+        .btn-login {
+            background-color: #ffc107;
+            color: #000;
+            border: none;
+            padding: 5px 20px;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+        .btn-login:hover {
+            background-color: #ffb300;
+            color: #000;
+        }
+        .btn-register {
+            background-color: #fff;
+            color: #666;
+            border: 1px solid #dee2e6;
+            padding: 5px 20px;
+            font-size: 0.875rem;
+        }
+        .btn-register:hover {
+            background-color: #f8f9fa;
+        }
+        .nav-categories {
+            background-color: #fff;
+            padding: 12px 0;
+            border-bottom: 1px solid #dee2e6;
+        }
+        .nav-categories .nav-link {
+            color: #666;
+            padding: 8px 15px;
+            font-size: 0.9rem;
+        }
+        .nav-categories .nav-link:hover {
+            color: #000;
+        }
+        .hero-section {
+    background-image: url('{% static "images/abc.jpg" %}');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: #181414ff;
+    padding: 60px 40px;
+    margin: 20px 0;
+    min-height: 400px;
+}
+.hero-section .row {
+    position: relative;
+    z-index: 1;
+}
+
+.hero-section h1 {
+    font-style: italic;
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+    text-shadow: 2px 2px 4px rgba(88, 31, 31, 0.7);
+}
+
+.hero-section p {
+    font-size: 1rem;
+    margin-bottom: 15px;
+    color: #121010ff;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+}
+
+.hero-section a {
+    color: #0c0606ff;
+    font-weight: 600;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+}
+        .post-card {
+            background-color: #fff;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            padding: 25px;
+            margin-bottom: 20px;
+            height: 100%;
+        }
+        .post-card h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        .post-meta {
+            color: #999;
+            font-size: 0.875rem;
+            margin-bottom: 15px;
+        }
+        .post-card p {
+            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        .blog-post {
+            background-color: #fff;
+            padding: 25px;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+        .blog-post h2 {
+            font-size: 1.75rem;
+            margin-bottom: 10px;
+        }
+        .blog-post-meta {
+            color: #999;
+            font-size: 0.875rem;
+            margin-bottom: 15px;
+        }
+        .blog-post-meta a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        .sidebar-about {
+            background-color: #fff;
+            padding: 25px;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+        }
+        .sidebar-about h4 {
+            font-style: italic;
+            margin-bottom: 15px;
+        }
+    </style>  
+</head>
+<body>
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center">
+                <a href="#" class="blog-name">World Stories</a>
+                <div>
+                    <button class="btn btn-login me-2">Login</button>
+                    <button class="btn btn-register">Register</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation Categories -->
+    <div class="nav-categories">
+        <div class="container">
+            <nav class="nav justify-content-start">
+                <a class="nav-link" href="#">World</a>
+                <a class="nav-link" href="#">U.S.</a>
+                <a class="nav-link" href="#">Technology</a>
+                <a class="nav-link" href="#">Design</a>
+                <a class="nav-link" href="#">Culture</a>
+                <a class="nav-link" href="#">Business</a>
+                <a class="nav-link" href="#">Politics</a>
+                <a class="nav-link" href="#">Opinion</a>
+                <a class="nav-link" href="#">Science</a>
+                <a class="nav-link" href="#">Health</a>
+                <a class="nav-link" href="#">Style</a>
+                <a class="nav-link" href="#">Travel</a>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Hero Section -->
+        <div class="hero-section">
+        <div class="row">
+            <div class="col-lg-8">
+            <h1>Title of a longer featured blog post</h1>
+            <p>Multiple lines of text that form the lede, informing new readers quickly and efficiently about what's most interesting in this post's contents.</p>
+            <a href="#">Continue reading...</a>
+            </div>
+        </div>
+    </div>
+
+        <!-- Featured Posts Row -->
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <div class="post-card">
+                    <h3>Post Title</h3>
+                    <div class="post-meta">Nov 11 | Author</div>
+                    <p>Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="post-card">
+                    <h3>Post Title</h3>
+                    <div class="post-meta">Nov 11 | Author</div>
+                    <p>Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Blog Posts and Sidebar -->
+        <div class="row">
+            <div class="col-md-8">
+                <!-- Sample Blog Post -->
+                <article class="blog-post">
+                    <h2>Sample blog post</h2>
+                    <p class="blog-post-meta">January 1, 2014 by <a href="#">Mark</a></p>
+                    <p>This blog post shows a few different types of content that's supported and styled with Bootstrap. Basic typography, images, and code are all supported.</p>
+                    <p>Cum sociis natoque penatibus et magnis <a href="#">dis parturient montes</a>, nascetur ridiculus mus. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Sed posuere consectetur est at lobortis. Cras mattis consectetur purus sit amet fermentum.</p>
+                </article>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="col-md-4">
+                <div class="sidebar-about mb-4">
+                    <h4>About</h4>
+                    <p class="mb-0">Etiam porta sem malesuada magna mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
+                </div>
+                
+                <div class="sidebar-about">
+                    <h4>Follow Us</h4>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-decoration-none text-primary">GitHub</a></li>
+                        <li><a href="#" class="text-decoration-none text-primary">LinkedIn</a></li>
+                        <li><a href="#" class="text-decoration-none text-primary">Twitter</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
