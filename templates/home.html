@@ -4,10 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Django Blog</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/blog.css'%}">
-     <style>
+    <style>
         body {
             background-color: #f8f9fa;
         }
@@ -32,7 +33,6 @@
         }
         .btn-login:hover {
             background-color: #ffb300;
-            color: #000;
         }
         .btn-register {
             background-color: #fff;
@@ -52,102 +52,53 @@
         .nav-categories .nav-link {
             color: #666;
             padding: 8px 15px;
-            font-size: 0.9rem;
         }
         .nav-categories .nav-link:hover {
             color: #000;
         }
-        .hero-section {
-    background-image: url('{% static "images/abc.jpg" %}');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    color: #181414ff;
-    padding: 60px 40px;
-    margin: 20px 0;
-    min-height: 400px;
-}
-.hero-section .row {
-    position: relative;
-    z-index: 1;
-}
-
-.hero-section h1 {
-    font-style: italic;
-    font-size: 2.5rem;
-    margin-bottom: 20px;
-    line-height: 1.3;
-    text-shadow: 2px 2px 4px rgba(88, 31, 31, 0.7);
-}
-
-.hero-section p {
-    font-size: 1rem;
-    margin-bottom: 15px;
-    color: #121010ff;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
-}
-
-.hero-section a {
-    color: #0c0606ff;
-    font-weight: 600;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
-}
         .post-card {
             background-color: #fff;
             border: 1px solid #dee2e6;
             border-radius: 4px;
             padding: 25px;
             margin-bottom: 20px;
-            height: 100%;
-        }
-        .post-card h3 {
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin-bottom: 10px;
         }
         .post-meta {
             color: #999;
             font-size: 0.875rem;
             margin-bottom: 15px;
         }
-        .post-card p {
-            color: #666;
-            font-size: 0.95rem;
-            line-height: 1.6;
-        }
-        .blog-post {
-            background-color: #fff;
-            padding: 25px;
-            border: 1px solid #dee2e6;
+        .featured-post-section {
+            height: 400px;
+            background-size: cover;
+            background-position: center;
             border-radius: 4px;
-            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            margin-bottom: 40px;
+            position: relative;
         }
-        .blog-post h2 {
-            font-size: 1.75rem;
-            margin-bottom: 10px;
-        }
-        .blog-post-meta {
-            color: #999;
-            font-size: 0.875rem;
-            margin-bottom: 15px;
-        }
-        .blog-post-meta a {
-            color: #007bff;
-            text-decoration: none;
-        }
-        .sidebar-about {
-            background-color: #fff;
-            padding: 25px;
-            border: 1px solid #dee2e6;
+        .featured-post-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.4);
             border-radius: 4px;
         }
-        .sidebar-about h4 {
-            font-style: italic;
-            margin-bottom: 15px;
+        .featured-post-content {
+            position: relative;
+            z-index: 1;
+            padding: 40px;
+            max-width: 600px;
+            color: white;
         }
-    </style>  
+    </style>
 </head>
 <body>
+
     <!-- Top Bar -->
     <div class="top-bar">
         <div class="container">
@@ -164,73 +115,70 @@
     <!-- Navigation Categories -->
     <div class="nav-categories">
         <div class="container">
-            <nav class="nav justify-content-start">
-                <a class="nav-link" href="#">World</a>
-                <a class="nav-link" href="#">U.S.</a>
-                <a class="nav-link" href="#">Technology</a>
-                <a class="nav-link" href="#">Design</a>
-                <a class="nav-link" href="#">Culture</a>
-                <a class="nav-link" href="#">Business</a>
-                <a class="nav-link" href="#">Politics</a>
-                <a class="nav-link" href="#">Opinion</a>
-                <a class="nav-link" href="#">Science</a>
-                <a class="nav-link" href="#">Health</a>
-                <a class="nav-link" href="#">Style</a>
-                <a class="nav-link" href="#">Travel</a>
+            <nav class="nav d-flex justify-content-between">
+                {% for cat in categories %}
+                    <a class="nav-link" href="#">{{ cat.category_name }}</a>
+                {% endfor %}
             </nav>
         </div>
     </div>
 
-    <!-- Main Content -->
     <div class="container">
-        <!-- Hero Section -->
-        <div class="hero-section">
-        <div class="row">
-            <div class="col-lg-8">
-            <h1>Title of a longer featured blog post</h1>
-            <p>Multiple lines of text that form the lede, informing new readers quickly and efficiently about what's most interesting in this post's contents.</p>
-            <a href="#">Continue reading...</a>
+
+        <!-- Featured Post -->
+        {% for post in featured_posts %}
+        {% if forloop.first %}
+        <div class="featured-post-section" style="background-image: url({{ post.featured_image.url }});">
+            <div class="featured-post-content">
+                <h1>{{ post.title }}</h1>
+                <p>{{ post.short_description }}</p>
+                <a href="#">Continue reading...</a>
             </div>
         </div>
-    </div>
+        {% endif %}
+        {% endfor %}
 
-        <!-- Featured Posts Row -->
-        <div class="row mb-4">
-            <div class="col-md-6">
+        <!-- Featured Posts -->
+        <h3 class="text-uppercase text-danger bold" style="letter-spacing:2px">Featured Posts</h3>
+        <div class="row mb-2">
+            {% for post in featured_posts %}
+            {% if not forloop.first %}
+            <div class="col-md-6 mb-3">
                 <div class="post-card">
-                    <h3>Post Title</h3>
-                    <div class="post-meta">Nov 11 | Author</div>
-                    <p>Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <h3>{{ post.title| truncatewords:7 }}</h3>
+                    <div class="post-meta">{{ post.created_at|timesince }} ago | {{ post.author }}</div>
+                    <p>{{ post.short_description | truncatewords:30}}</p>
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="post-card">
-                    <h3>Post Title</h3>
-                    <div class="post-meta">Nov 11 | Author</div>
-                    <p>Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                </div>
-            </div>
+            {% endif %}
+            {% endfor %}
         </div>
 
-        <!-- Blog Posts and Sidebar -->
+<h3 class="text-uppercase text-danger bold" style="letter-spacing:2px">Recents Articles</h3>
+
+        <!-- Main Content + Sidebar -->
         <div class="row">
-            <div class="col-md-8">
-                <!-- Sample Blog Post -->
-                <article class="blog-post">
-                    <h2>Sample blog post</h2>
-                    <p class="blog-post-meta">January 1, 2014 by <a href="#">Mark</a></p>
-                    <p>This blog post shows a few different types of content that's supported and styled with Bootstrap. Basic typography, images, and code are all supported.</p>
-                    <p>Cum sociis natoque penatibus et magnis <a href="#">dis parturient montes</a>, nascetur ridiculus mus. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Sed posuere consectetur est at lobortis. Cras mattis consectetur purus sit amet fermentum.</p>
-                </article>
+
+            <!-- Left: Blog Posts -->
+            <div class="col-md-7">
+                {% for post in posts %}
+                <div class="card border-0 mb-3 ">
+                            <h2>{{ post.title |truncatewords:7 }}</h2>
+                            <div class="post-meta">{{ post.created_at|timesince }} ago | {{ post.author }}</div>
+                            <p>{{ post.short_description | truncatewords:20}}</p>
+                        
+                            
+                        </div>
+                {% endfor %}
             </div>
 
-            <!-- Sidebar -->
-            <div class="col-md-4">
+            <!-- Right: Sidebar -->
+            <div class="col-md-5">
                 <div class="sidebar-about mb-4">
                     <h4>About</h4>
-                    <p class="mb-0">Etiam porta sem malesuada magna mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
+                    <p>Etiam porta sem malesuada magna mollis euismod.</p>
                 </div>
-                
+
                 <div class="sidebar-about">
                     <h4>Follow Us</h4>
                     <ul class="list-unstyled">
@@ -240,9 +188,12 @@
                     </ul>
                 </div>
             </div>
-        </div>
-    </div>
+
+        </div> <!-- END ROW -->
+
+    </div> <!-- END CONTAINER -->
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>
