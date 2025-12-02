@@ -1,0 +1,162 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Django Blog</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/blog.css'%}">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .top-bar {
+            background-color: #fff;
+            padding: 10px 0;
+            border-bottom: 1px solid #dee2e6;
+        }
+        .blog-name {
+            font-weight: 700;
+            color: #333;
+            text-decoration: none;
+            font-size: 2.25rem;
+        }
+        .btn-login {
+            background-color: #ffc107;
+            color: #000;
+            border: none;
+            padding: 5px 20px;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+        .btn-login:hover {
+            background-color: #ffb300;
+        }
+        .btn-register {
+            background-color: #fff;
+            color: #666;
+            border: 1px solid #dee2e6;
+            padding: 5px 20px;
+            font-size: 0.875rem;
+        }
+        .btn-register:hover {
+            background-color: #f8f9fa;
+        }
+        .nav-categories {
+            background-color: #fff;
+            padding: 12px 0;
+            border-bottom: 1px solid #dee2e6;
+        }
+        .nav-categories .nav-link {
+            color: #666;
+            padding: 8px 15px;
+        }
+        .nav-categories .nav-link:hover {
+            color: #000;
+        }
+        .post-card {
+            background-color: #fff;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            padding: 25px;
+            margin-bottom: 20px;
+        }
+        .post-meta {
+            color: #999;
+            font-size: 0.875rem;
+            margin-bottom: 15px;
+        }
+        .featured-post-section {
+            height: 400px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+        .featured-post-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 4px;
+        }
+        .featured-post-content {
+            position: relative;
+            z-index: 1;
+            padding: 40px;
+            max-width: 600px;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center">
+                <a href="#" class="blog-name">World Stories</a>
+                <div>
+                    <button class="btn btn-login me-2">Login</button>
+                    <button class="btn btn-register">Register</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation Categories -->
+    <div class="nav-categories">
+        <div class="container">
+            <nav class="nav d-flex justify-content-between">
+                {% for cat in categories %}
+                    <a class="nav-link" href="#">{{ cat.category_name }}</a>
+                {% endfor %}
+            </nav>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Featured Post -->
+        {% for post in featured_posts %}
+        {% if forloop.first %}
+        <div class="featured-post-section" style="background-image: url({{ post.featured_image.url }});">
+            <div class="featured-post-content">
+                <h1>{{ post.title }}</h1>
+                <p>{{ post.short_description }}</p>
+                <a href="#">Continue reading...</a>
+            </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+        <!-- Featured Posts -->
+        <h3 class="text-uppercase text-danger bold" style="letter-spacing:2px">Category - {{category_id}}</h3>
+        <div class="row mb-2">
+            {% if posts %}
+            {% for post in posts %}
+            <div class="col-md-6 mb-3">
+                <div class="post-card">
+                    <h3>{{ post.title| truncatewords:7 }}</h3>
+                    <div class="post-meta">{{ post.created_at|timesince }} ago | {{ post.author }}</div>
+                    <p>{{ post.short_description | truncatewords:30}}</p>
+                </div>
+            </div>
+            {% endfor %}
+            {% else %}
+            <p>No posts found</p>
+            {% endif %}
+        </div>
+
+    </div>
+    </div> <!-- END CONTAINER -->
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<footer><center>Built By Anish</center></footer>
+</body>
+</html>
