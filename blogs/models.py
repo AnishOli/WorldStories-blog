@@ -1,15 +1,22 @@
 from django.db import models
 from django.contrib.auth import get_user_model  # i used this because it can be used for custom user too
-
+from django.db.models import UniqueConstraint
+from django.db.models.functions import Lower
 
 # Create your models here.
 # creating category model 
 class Category(models.Model):
-    category_name = models.CharField(max_length=70, unique=True)
+    category_name = models.CharField(max_length=70)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
+        constraints = [
+            UniqueConstraint(
+                Lower('category_name'),
+                name='unique_category_name_ci'
+            )
+        ]
         verbose_name = 'categories'
 
     def __str__(self):
