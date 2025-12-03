@@ -11,7 +11,8 @@
             {% for post in posts %}
             <div class="col-md-6 mb-3">
                 <div class="post-card p-3 border rounded">
-                    <h5 class="mb-2">{{ post.title|truncatewords:7 }}</h5>
+                     <h5><a href="{% url 'blogs' post.slug %}"  style="text-decoration: none; color : green;">{{ post.title|truncatewords:7 }}</a></h5>
+
                     <div class="post-meta mb-2 text-muted">{{ post.created_at|timesince }} ago | {{ post.author }}</div>
                     <p class="mb-0">{{ post.short_description|truncatewords:30 }}</p>
                 </div>

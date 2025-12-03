@@ -1,0 +1,172 @@
+/* Typography */
+.blog-header-logo,
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Playfair Display", Georgia, "Times New Roman", serif;
+}
+
+.blog-header-logo {
+  font-size: 2.25rem;
+}
+.blog-header-logo:hover {
+  text-decoration: none;
+}
+
+/* Body & layout */
+body {
+  background-color: #f8f9fa;
+}
+.flex-auto {
+  flex: 0 0 auto;
+}
+
+/* Top Bar */
+.top-bar {
+  background-color: #fff;
+  padding: 10px 0;
+  border-bottom: 1px solid #dee2e6;
+}
+.blog-name {
+  font-weight: 700;
+  color: #333;
+  text-decoration: none;
+  font-size: 2.25rem;
+}
+
+/* Buttons */
+.btn-login {
+  background-color: #ffc107;
+  color: #000;
+  border: none;
+  padding: 5px 20px;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+.btn-login:hover {
+  background-color: #ffb300;
+}
+.btn-register {
+  background-color: #fff;
+  color: #666;
+  border: 1px solid #dee2e6;
+  padding: 5px 20px;
+  font-size: 0.875rem;
+}
+.btn-register:hover {
+  background-color: #f8f9fa;
+}
+
+/* Navigation Categories - Horizontal Scroll with Arrows */
+.nav-categories {
+  background-color: #fff;
+  padding: 12px 0;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.nav-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  position: relative;
+}
+
+.scroll-btn {
+  background-color: #ffc107;
+  border: none;
+  padding: 8px 12px;
+  cursor: pointer;
+  font-weight: bold;
+  color: #000;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+  flex-shrink: 0;
+}
+
+.scroll-btn:hover {
+  background-color: #ffb300;
+}
+
+.scroll-btn:disabled {
+  background-color: #e0e0e0;
+  cursor: not-allowed;
+  color: #999;
+}
+
+.nav-container {
+  flex: 1;
+  overflow: hidden;
+}
+
+.nav-categories .nav {
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  display: flex;
+  width: 100%;
+  flex-wrap: nowrap;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-categories .nav::-webkit-scrollbar {
+  display: none;
+}
+
+.nav-categories .nav-link {
+  display: inline-block;
+  margin-right: 1rem;
+  color: #666;
+  padding: 8px 15px;
+  flex-shrink: 0;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.nav-categories .nav-link:hover {
+  color: #000;
+}
+
+/* Posts */
+.post-card {
+  background-color: #fff;
+  border: 1px solid #dee2e6;
+  border-radius: 4px;
+  padding: 25px;
+  margin-bottom: 20px;
+}
+.post-meta {
+  color: #999;
+  font-size: 0.875rem;
+  margin-bottom: 15px;
+}
+
+/* Featured Post Section */
+.featured-post-section {
+  height: 400px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 40px;
+  position: relative;
+}
+.featured-post-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 4px;
+}
+.featured-post-content {
+  position: relative;
+  z-index: 1;
+  padding: 40px;
+  max-width: 600px;
+  color: white;
+}

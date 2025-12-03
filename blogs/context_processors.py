@@ -5,7 +5,7 @@ from blogs.models import Category
 
 def get_categories(request):
     view_name = resolve(request.path_info).url_name
-    if view_name in ['home', 'posts_by_category']:  # only for these views we will write here where we need it 
+    if view_name in ['home', 'posts_by_category','blogs',]:  # only for these views we will write here where we need it 
         categories = Category.objects.all()
         return {'categories': categories}
     return {}
