@@ -1,53 +1,72 @@
-<!--- header --->
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Django Blog</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+</head>
+<body>
 
-    <title>Django Blog</title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="{% static 'css/blog.css' %}">
-   
-  </head>
-  <body>
-    <!-- Top Bar -->
-    <div class="top-bar">
-      <div class="container">
-        <div class="d-flex justify-content-between align-items-center">
-          <a href="{% url 'home'%}" class="blog-name">World Stories</a>
-          <div>
-            <button class="btn btn-login me-2">Login</button>
-            <button class="btn btn-register">Register</button>
-          </div>
+  <!-- Top Bar -->
+  <div class="top-bar">
+    <div class="container d-flex justify-content-between align-items-center">
+      <a href="{% url 'home'%}" class="blog-name">World Stories</a>
+      <div>
+        <button class="btn btn-login me-2">Login</button>
+        <button class="btn btn-register">Register</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation Categories with Arrows -->
+  <div class="nav-categories">
+    <div class="container">
+      <div class="nav-wrapper">
+        <button class="scroll-btn scroll-left" id="scrollLeft" onclick="scrollNav(-100)">←</button>
+        
+        <div class="nav-container">
+          <nav class="nav" id="navScroll">
+            {% for cat in categories %}
+              <a class="nav-link" href="{% url 'posts_by_category' cat.id %}">{{ cat.category_name }}</a>
+            {% endfor %}
+          </nav>
         </div>
+
+        <button class="scroll-btn scroll-right" id="scrollRight" onclick="scrollNav(100)">→</button>
       </div>
     </div>
-    <!-- Navigation Categories -->
-    <div class="nav-categories">
-      <div class="container">
-        <nav class="nav d-flex justify-content-between">
-          {% for cat in categories %}
-          <a class="nav-link" href="#">{{ cat.category_name }}</a>
-          {% endfor %}
-        </nav>
-      </div>
-    </div>
+  </div>
 
-<!--- Main Content --->
-{% block content %}
+  <!-- Main Content -->
+  {% block content %}
+  {% endblock content %}
 
+  <!-- Footer -->
+  <footer class="blog footer text-center py-3">Built By Anish</footer>
 
-{% endblock content %}
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  
+  <script>
+    const nav = document.getElementById('navScroll');
+    const scrollLeftBtn = document.getElementById('scrollLeft');
+    const scrollRightBtn = document.getElementById('scrollRight');
 
+    function scrollNav(direction) {
+      nav.scrollBy({ left: direction, behavior: 'smooth' });
+      updateButtonStates();
+    }
 
+    function updateButtonStates() {
+      scrollLeftBtn.disabled = nav.scrollLeft === 0;
+      scrollRightBtn.disabled = nav.scrollLeft >= (nav.scrollWidth - nav.clientWidth - 10);
+    }
 
-<!--- Footer --->
-<footer class= 'blog footer'><center>Built By Anish</center></footer>
-   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-  </body>
+    nav.addEventListener('scroll', updateButtonStates);
+    window.addEventListener('load', updateButtonStates);
+    window.addEventListener('resize', updateButtonStates);
+  </script>
+</body>
 </html>

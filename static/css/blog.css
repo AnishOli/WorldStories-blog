@@ -1,57 +1,25 @@
-/* stylelint-disable @stylistic/selector-list-comma-newline-after */
-
-.blog-header-logo {
-  font-family: "Playfair Display", Georgia, "Times New Roman",
-    serif /*rtl:Amiri, Georgia, "Times New Roman", serif*/;
-  font-size: 2.25rem;
+/* Typography */
+.blog-header-logo,
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Playfair Display", Georgia, "Times New Roman", serif;
 }
 
+.blog-header-logo {
+  font-size: 2.25rem;
+}
 .blog-header-logo:hover {
   text-decoration: none;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: "Playfair Display", Georgia, "Times New Roman",
-    serif /*rtl:Amiri, Georgia, "Times New Roman", serif*/;
+/* Body & layout */
+body {
+  background-color: #f8f9fa;
 }
-
 .flex-auto {
   flex: 0 0 auto;
 }
 
-.h-250 {
-  height: 250px;
-}
-@media (min-width: 768px) {
-  .h-md-250 {
-    height: 250px;
-  }
-}
-
-/* Pagination */
-.blog-pagination {
-  margin-bottom: 4rem;
-}
-
-/*
- * Blog posts
- */
-.blog-post {
-  margin-bottom: 4rem;
-}
-.blog-post-meta {
-  margin-bottom: 1.25rem;
-  color: #727272;
-}
-
-body {
-  background-color: #f8f9fa;
-}
+/* Top Bar */
 .top-bar {
   background-color: #fff;
   padding: 10px 0;
@@ -63,6 +31,8 @@ body {
   text-decoration: none;
   font-size: 2.25rem;
 }
+
+/* Buttons */
 .btn-login {
   background-color: #ffc107;
   color: #000;
@@ -84,18 +54,81 @@ body {
 .btn-register:hover {
   background-color: #f8f9fa;
 }
+
+/* Navigation Categories - Horizontal Scroll with Arrows */
 .nav-categories {
   background-color: #fff;
   padding: 12px 0;
   border-bottom: 1px solid #dee2e6;
 }
+
+.nav-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  position: relative;
+}
+
+.scroll-btn {
+  background-color: #ffc107;
+  border: none;
+  padding: 8px 12px;
+  cursor: pointer;
+  font-weight: bold;
+  color: #000;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+  flex-shrink: 0;
+}
+
+.scroll-btn:hover {
+  background-color: #ffb300;
+}
+
+.scroll-btn:disabled {
+  background-color: #e0e0e0;
+  cursor: not-allowed;
+  color: #999;
+}
+
+.nav-container {
+  flex: 1;
+  overflow: hidden;
+}
+
+.nav-categories .nav {
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  display: flex;
+  width: 100%;
+  flex-wrap: nowrap;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-categories .nav::-webkit-scrollbar {
+  display: none;
+}
+
 .nav-categories .nav-link {
+  display: inline-block;
+  margin-right: 1rem;
   color: #666;
   padding: 8px 15px;
+  flex-shrink: 0;
+  text-decoration: none;
+  transition: color 0.3s;
 }
+
 .nav-categories .nav-link:hover {
   color: #000;
 }
+
+/* Posts */
 .post-card {
   background-color: #fff;
   border: 1px solid #dee2e6;
@@ -108,6 +141,8 @@ body {
   font-size: 0.875rem;
   margin-bottom: 15px;
 }
+
+/* Featured Post Section */
 .featured-post-section {
   height: 400px;
   background-size: cover;
