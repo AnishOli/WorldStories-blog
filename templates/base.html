@@ -15,13 +15,50 @@
     <div class="container d-flex justify-content-between align-items-center">
       <a href="{% url 'home'%}" class="blog-name">World Stories</a>
       <div>
-        <button class="btn btn-login me-2">Login</button>
-        <button class="btn btn-register">Register</button>
+        <form action="{% url 'search'%}" method = "GET">
+                    <div class="input-group">
+                        <input class="form-control" type="text" placeholder="Enter search term..."  aria-label="Enter search term..." aria-describedby="button-search" name= "keyword" value= {{keyword}}>
+                        <button class="btn btn-primary" id="button-search" type="submit">Search</button>
+                    </div>
+        </form>
+      </div>
+      <div>
+        
+        {% if request.user.is_authenticated %}
+        <div class="d-flex align-items-center gap-3">
+           
+          <a class="mb-0" style = "text-decoration:none; font-size:30px; font-family:italic; color:Black">{{ request.user.first_name }}</a>
+      {% comment %} <a href="{%url 'profile'%}">
+        <img 
+            src="{{ request.user.profile.image.url }}" 
+            
+            style="width:40px; height:40px; border-radius:50%; object-fit:cover;">
+    </a>  {% endcomment %}
+
+     {% if request.user.profile.image %}
+    <a href="{% url 'profile' %}">
+    <img src="{{ request.user.profile.image.url }}" 
+         style="width:40px; height:40px; border-radius:50%; object-fit:cover;">
+{% else %}
+      <a href="{% url 'profile' %}">
+    <img  src="/static/images/abc.jpg" 
+         style="width:40px; height:40px; border-radius:50%; object-fit:cover;">
+{% endif %} 
+
+    <a href="{%url 'logout'%}" class="btn btn-primary me-2">Logout</a>
+</div>
+        {% else %}
+           <a href="{% url 'login'%}" class= "btn btn-primary me-2 ">Login</a>
+        <a href="{% url 'register'%}" class= "btn btn-secondary ">Register</a>
+        {% endif %}
+          
+       
       </div>
     </div>
   </div>
 
   <!-- Navigation Categories with Arrows -->
+  {% if not hide_categories %}
   <div class="nav-categories">
     <div class="container">
       <div class="nav-wrapper">
@@ -39,13 +76,18 @@
       </div>
     </div>
   </div>
+  {%endif%}
 
   <!-- Main Content -->
   {% block content %}
   {% endblock content %}
 
-  <!-- Footer -->
-  <footer class="blog footer text-center py-3">Built By Anish</footer>
+ <footer class="blog-footer">
+  <div class="footer-container">
+    <p class="footer-text"><Center> © 2025 • Built by <strong>Anish</strong></Center></p>
+    </div>
+</footer>
+
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   

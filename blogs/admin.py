@@ -1,4 +1,5 @@
 from django.contrib import admin
+
 from .models import Category,Blog
 
 
@@ -10,6 +11,15 @@ class BlogAdmin(admin.ModelAdmin):
     search_fields = ('id', 'title','category__category_name','status')
     list_editable = ('is_featured',)
 
+
+# class CategoryAdmin(admin.ModelAdmin):
+#     def has_add_permission(self, request):
+#         totalCategory = Category.objects.all().count()
+#         if totalCategory <=10:
+#             return True
+#         else:
+#             return False
+           
 # Register your models here.
 admin.site.register(Category)
 admin.site.register(Blog, BlogAdmin)

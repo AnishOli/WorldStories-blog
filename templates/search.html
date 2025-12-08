@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <!-- Featured Posts -->
+    <h3 style="letter-spacing:2px;">
+        Search terms - {{ keyword }}
+    </h3>
+    <div class="row">
+        {% if blogs %}
+            {% for a in blogs %}
+            <div class="col-md-6 mb-3">
+                <div class="post-card p-3 border rounded">
+                     <h5><a href="{% url 'blogs' a.slug %}"  style="text-decoration: none; color : green;">{{ a.title|truncatewords:7 }}</a></h5>
+
+                    <div class="post-meta mb-2 text-muted">{{ a.created_at|timesince }} ago | {{ a.author }}</div>
+                    <p class="mb-0">{{ a.short_description|truncatewords:30 }}</p>
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <p>No posts found</p>
+        {% endif %}
+    </div>
+
+</div>
+
+{% endblock  %}

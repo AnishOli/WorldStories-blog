@@ -1,11 +1,23 @@
 
 # this is done to get access of category in all page without doing context dict in every function
 from django.urls import resolve
+from assignments.models import SocialLink
 from blogs.models import Category
+# from django.contrib.auth.decorators import login_required
+# from django.contrib.auth import login
 
+# @login_required(login_url=login)
 def get_categories(request):
     view_name = resolve(request.path_info).url_name
-    if view_name in ['home', 'posts_by_category','blogs',]:  # only for these views we will write here where we need it 
+    if view_name in ['home', 'posts_by_category','blogs','search','register', 'login']:  # only for these views we will write here where we need it 
         categories = Category.objects.all()
         return {'categories': categories}
     return {}
+
+def get_social_links(request):
+    view_name = resolve(request.path_info).url_name
+    if view_name in ['home', 'posts_by_category', 'blogs',]:
+        social_links = SocialLink.objects.all()
+        return{'social_links':social_links}
+    return{}
+    

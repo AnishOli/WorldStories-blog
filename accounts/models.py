@@ -33,10 +33,11 @@ class Customer (AbstractBaseUser, PermissionsMixin):
     last_name = models.CharField(max_length=200)
     email = models.EmailField(unique=True,max_length=200)
     phone_number = models.CharField(max_length=10, unique=True)
+    city = models.CharField(max_length=200, null=True)
     dob = models.DateField(blank=True, null=True)
     profile_image = models.ImageField(
         upload_to="",
-        default='images/abc.jpg',
+        default='images/bg.jpg',
         blank=True,
         null=True
     )
