@@ -1,3 +1,14 @@
 *.min.js linguist-vendored
 static/js/* linguist-vendored
 *.js linguist-detectable=false
+
+
+# Hide JavaScript from language stats
+*.js linguist-vendored
+
+# Or hide everything in the static folders
+static/* linguist-vendored
+staticfiles/* linguist-vendored
+
+# Hide CSS also if needed
+*.css linguist-vendored
