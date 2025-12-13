@@ -1,0 +1,10 @@
+
+
+<div class="col-md-3">
+            <div class="nav flex-column nav-pills bg-light h-100">
+                <a href="{% url 'dashboard'%}" class="nav-link text-dark {% if '/dashboard/' == request.path %}bg-warning{% endif %} blink-hover">Dashboard</a>
+                <a href="{% url 'categories'%}"class="nav-link text-dark {% if '/categories/' in request.path %}bg-warning{% endif %} blink-hover">Categories</a>
+                <a href="#" class="nav-link text-dark blink-hover">Posts </a>
+                <a href="#" class="nav-link text-dark blink-hover">Logout</a>
+            </div>
+        </div>

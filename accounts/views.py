@@ -23,7 +23,7 @@ def user_login(request):
         
         if check_password(password,user.password):
             login(request,user)
-            return redirect('home')
+            return redirect('dashboard')
         else:
             messages.error(request,"Sorry incorrect password")
     return render(request, 'login.html')
