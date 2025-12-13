@@ -120,7 +120,7 @@
 
 <div class="login-page">
 
-<form action="#" method="POST">
+<form action="{% url 'login' %}" method="POST">
       {% csrf_token %}
 
 <h1>Login Page</h1>

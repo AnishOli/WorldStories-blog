@@ -25,19 +25,23 @@
       <div>
         
         {% if request.user.is_authenticated %}
+
         <div class="d-flex align-items-center gap-3">
+          <span>
+            <a href="{%url 'dashboard' %}">Dashboard</a>
+          </span>
            
           <a class="mb-0" style = "text-decoration:none; font-size:30px; font-family:italic; color:Black">{{ request.user.first_name }}</a>
       {% comment %} <a href="{%url 'profile'%}">
         <img 
-            src="{{ request.user.profile.image.url }}" 
+            src="{{ request.user.profile_image.url }}" 
             
             style="width:40px; height:40px; border-radius:50%; object-fit:cover;">
     </a>  {% endcomment %}
 
-     {% if request.user.profile.image %}
+      {% if request.user.profile_image %}
     <a href="{% url 'profile' %}">
-    <img src="{{ request.user.profile.image.url }}" 
+    <img src="{{ request.user.profile_image.url }}" 
          style="width:40px; height:40px; border-radius:50%; object-fit:cover;">
 {% else %}
       <a href="{% url 'profile' %}">
@@ -84,7 +88,7 @@
 
  <footer class="blog-footer">
   <div class="footer-container">
-    <p class="footer-text"><Center> © 2025 • Built by <strong>Anish</strong></Center></p>
+    <p class="footer-text" ><Center> © 2025 • Built by <strong>Anish</strong></Center></p>
     </div>
 </footer>
 

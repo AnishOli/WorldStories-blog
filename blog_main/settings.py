@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'blogs',
     'accounts',
     'assignments',
+    'dashboard',
 ]
 
 MIDDLEWARE = [
@@ -134,3 +135,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 #media field
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR/'media'
+
+
+# AUTHENTICATION_BACKENDS = [
+#     'accounts.backends.EmailBackend',  # Your custom backend
+#     'django.contrib.auth.backends.ModelBackend',  # Django's default
+# ]
+LOGIN_URL = 'admin:login'

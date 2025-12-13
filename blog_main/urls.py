@@ -27,9 +27,15 @@ urlpatterns = [
     path('category/', include('blogs.urls')),
     
     path('', include('accounts.urls')),
+    path('dashboard/', include('dashboard.urls')),
 
 #search endpoint
 path('blogs/search/', BlogsView.search, name = "search"),
 
 path('<slug:slug>/', BlogsView.blogs, name='blogs'),
+
+
+# urls for dashboard
+
+
 ] + static(settings.MEDIA_URL,document_root = settings.MEDIA_ROOT)

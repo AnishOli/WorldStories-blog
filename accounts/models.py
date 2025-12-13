@@ -37,7 +37,7 @@ class Customer (AbstractBaseUser, PermissionsMixin):
     dob = models.DateField(blank=True, null=True)
     profile_image = models.ImageField(
         upload_to="",
-        default='images/bg.jpg',
+        default='bg.jpg',
         blank=True,
         null=True
     )
@@ -51,7 +51,11 @@ class Customer (AbstractBaseUser, PermissionsMixin):
 
     
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = []
+    REQUIRED_FIELDS = ['first_name', 'last_name']
+
+    class Meta:
+        verbose_name = 'Customer'
+        verbose_name_plural = 'Customers'
 
     def __str__(self):
         return self.email

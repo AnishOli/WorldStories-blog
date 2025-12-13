@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+    @keyframes blink {
+    0%   { opacity: 1; }
+    50%  { opacity: 0.3; }
+    100% { opacity: 1; }
+}
+
+.nav-link.blink-hover:hover {
+    animation: blink 0.6s infinite;
+}
+</style>
+
+<div class="container mt-3">   <!-- IMPORTANT -->
+
+    <div class="row">
+        <!-- Left Sidebar -->
+        <div class="col-md-3">
+            <div class="nav flex-column nav-pills bg-light h-100">
+                <a href="#" class="nav-link text-dark bg-warning blink-hover">Dashboard</a>
+                <a href="#" class="nav-link text-dark blink-hover">Categories</a>
+                <a href="#" class="nav-link text-dark blink-hover">Posts</a>
+                <a href="#" class="nav-link text-dark blink-hover">Logout</a>
+            </div>
+        </div>
+
+        <!-- Right Side -->
+        <div class="col-md-9">
+    <div class="row"> <!-- Create a nested row -->
+        <!-- First Card -->
+        <div class="col-md-6"> <!-- Half width -->
+            <div class="card mb-2">
+                <div class="card-header text-center text-uppercase font-weight-bold">
+                    All Categories
+                </div>
+                <div class="card-body text-dark">
+                    <h5 class="card-title text-center">10</h5>
+                </div>
+            </div>
+        </div>
+
+        <!-- Second Card -->
+        <div class="col-md-6"> <!-- Half width -->
+            <div class="card mb-2">
+                <div class="card-header text-center text-uppercase font-weight-bold">
+                    All Post
+                </div>
+                <div class="card-body text-dark">
+                    <h5 class="card-title text-center">10</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+{% endblock content %}
