@@ -19,7 +19,7 @@
       <div>
         <form action="{% url 'search'%}" method = "GET">
                     <div class="input-group">
-                        <input class="form-control" type="text" placeholder="Enter search term..."  aria-label="Enter search term..." aria-describedby="button-search" name= "keyword" value= {{keyword}}>
+                        <input class="form-control" type="text" placeholder="Enter search term..."  aria-label="Enter search term..." aria-describedby="button-search" name= "keyword" value= "{{keyword}}">
                         <button class="btn btn-primary" id="button-search" type="submit">Search</button>
                     </div>
         </form>

@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'accounts',
     'assignments',
     'dashboard',
+    "crispy_forms",
+    "crispy_bootstrap5",
 ]
 
 MIDDLEWARE = [
@@ -142,3 +144,7 @@ MEDIA_ROOT = BASE_DIR/'media'
 #     'django.contrib.auth.backends.ModelBackend',  # Django's default
 # ]
 LOGIN_URL = 'admin:login'
+
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = "bootstrap5"

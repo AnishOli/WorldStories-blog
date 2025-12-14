@@ -1,68 +1,69 @@
-{% extends "base.html" %}
-
-{% block content %}
+{% extends "base.html" %} {% block content %}
 <style>
-    @keyframes blink {
-    0%   { opacity: 1; }
-    50%  { opacity: 0.3; }
-    100% { opacity: 1; }
-}
+  @keyframes blink {
+    0% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.3;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
 
-.nav-link.blink-hover:hover {
+  .nav-link.blink-hover:hover {
     animation: blink 0.6s infinite;
-}
+  }
 </style>
 
-<div class="container mt-3">   <!-- IMPORTANT -->
+<div class="container mt-3">
+  <!-- IMPORTANT -->
 
-    <div class="row">
-        <!-- Left Sidebar -->
-        <!-- Load this side bar here-->
+  <div class="row">
+    <!-- Left Sidebar -->
+    <!-- Load this side bar here-->
 
-        {% include 'dashboard/sidebar.html' %}
+    {% include 'dashboard/sidebar.html' %}
 
-        <!-- Right Side -->
-        <div class="col-md-9">
-            <div class="row"> <!-- Create a nested row -->
-                <!-- First Card -->
-
-                 <h2><center>All Categories</center></h2>
-                <table class="table table-hover">
-                   
-  <thead>
-
-    <tr>
-      <th scope="col">S.N</th>
-      <th scope="col">Category Name</th>
-      <th scope="col">Created at</th>
-      <th scope="col">Updated at</th>
-      <th scope="col">Action</th>
-    </tr>
-  </thead>
-  <tbody>
-    <!-- We have context processor and we can take category from there-->
-    {% for cat in categories%}
-    <tr>
-      <th scope="row">{{forloop.counter}}</th>
-      <td>{{cat}}</td>
-      <td>{{cat.created_at}}</td>
-      <td>{{cat.updated_at}}</td>
-      <td>
-       <a href="#"> <i class="fas fa-edit text-success"></i></a>
-        &nbsp; 
-        &nbsp; 
-        <a href="#"><i class="fas fa-trash text-danger"></i></a>
-    
-      
-    </td>
-
-    </tr>
-    {% endfor %}
-  </tbody>
-</table>
-                
-            </div>
+    <!-- Right Side -->
+    <div class="col-md-9">
+      <h2><center>All Categories</center></h2>
+        <div class="d-flex">
+          <a href="{% url  'add_category'%}" class="btn btn-primary text-light mb-2 ms-auto"><i class="fas fa-edit text-light"></i>  Add New</a>
         </div>
+    
+      <div class="row">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col">S.N</th>
+              <th scope="col">Category Name</th>
+              <th scope="col">Created at</th>
+              <th scope="col">Updated at</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- We have context processor and we can take category from there-->
+            {% for cat in categories%}
+            <tr>
+              <th scope="row">{{forloop.counter}}</th>
+              <td>{{cat}}</td>
+              <td>{{cat.created_at}}</td>
+              <td>{{cat.updated_at}}</td>
+              <td>
+                <a href="{% url 'edit_category' cat.id %}"> <i class="fas fa-edit text-success"></i></a>
+                &nbsp; &nbsp;
+                <a href="{% url 'delete_category' cat.id %}"><i class="fas fa-trash text-danger"></i></a>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
     </div>
+  </div>
 
-{% endblock content %}
+  {% endblock content %}
+</div>
