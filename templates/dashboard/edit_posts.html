@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+
+<style>
+    @keyframes blink {
+    0%   { opacity: 1; }
+    50%  { opacity: 0.3; }
+    100% { opacity: 1; }
+}
+
+.nav-link.blink-hover:hover {
+    animation: blink 0.6s infinite;
+}
+</style>
+
+<div class="container mt-3">   <!-- IMPORTANT -->
+
+    <div class="row">
+        <!-- Left Sidebar -->
+        <!-- Load this side bar here-->
+
+        {% include 'dashboard/sidebar.html' %}
+
+
+
+        <!-- Right Side -->
+        <div class="col-md-9">
+            <div class="row"> <!-- Create a nested row -->
+                <!-- First Card -->
+
+                 <h2><center> Edit Blog Posts</center></h2>
+                  {% if messages %}
+  {% for message in messages %}
+    <div class="alert alert-danger" style= "width:300pz;">
+      {{ message }}
+    </div>
+  {% endfor %}
+{% endif %}
+
+                 <form action="{% url 'edit_posts' post.id %}" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{form|crispy}}
+                    
+
+                    <button type= submit class= 'btn btn-warning'>Submit</button>
+                 </form>
+                
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}

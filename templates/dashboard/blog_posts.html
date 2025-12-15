@@ -57,9 +57,9 @@
               <td>{{post.status}}</td>
               <td>{{post.is_featured}}</td>
               <td>
-                <a href="#"> <i class="fas fa-edit text-success"></i></a>
+                <a href="{%url 'edit_posts' post.id %}"> <i class="fas fa-edit text-success"></i></a>
                 &nbsp; 
-                <a href="#"><i class="fas fa-trash text-danger"></i></a>
+                <a href="{%url 'delete_posts' post.id%}"><i class="fas fa-trash text-danger"></i></a>
               </td>
             </tr>
             {% endfor %}

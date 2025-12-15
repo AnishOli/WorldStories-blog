@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 from accounts.views import user_login
 from blogs.models import Blog, Category
 from dashboard.forms import BlogPostForm, CategoryForm
-from django.utils.text import slugify
+from django.template.defaultfilters import slugify
 
 
 
@@ -99,13 +99,35 @@ def blog_posts(request):
      }
      return render(request, 'dashboard/blog_posts.html',context)
 
+# from django.utils.text import slugify
+
+
+# def generate_unique_slug(title):
+#     base_slug = slugify(title)
+#     slug = base_slug
+#     counter = 1
+#     while Blog.objects.filter(slug=slug).exists():
+#         slug = f"{base_slug}-{counter}"
+#         counter += 1
+#     return slug
+
+
 def add_posts(request):
      if request.method == "POST":
         form = BlogPostForm(request.POST,request.FILES)
+        # if form.is_valid():
+        #     post = form.save(commit=False)
+        #     post.author = request.user
+        #     post.slug = generate_unique_slug(form.cleaned_data['title'])
+        #     post.save()
+        #     messages.success(request, "Blogs added successfully!")
+        #     return redirect('blog_posts')
         if form.is_valid():
             post = form.save(commit=False)
             post.author = request.user 
-            # post.slug = slugify(post.title)  
+            post.save()
+            title = form.cleaned_data['title']
+            post.slug = slugify(title) + '-' +str(post.id)
             post.save()
             messages.success(request, "Blogs added successfully!")
             return redirect('blog_posts')
@@ -120,3 +142,27 @@ def add_posts(request):
      }
      return render(request, "dashboard/add_posts.html", context)
     
+
+def edit_posts(request,pk):
+     post = get_object_or_404(Blog,pk=pk)
+     if request.method == "POST":
+          form = BlogPostForm(request.POST, instance=post)
+          if form.is_valid():
+               form.save()
+               return redirect('blog_posts')
+     else:
+        form = BlogPostForm(instance=post)
+     
+     context ={
+          'form':form,
+          'hide_categories':True,
+          'post':post,
+     }
+
+     return render(request, 'dashboard/edit_posts.html',context )
+
+
+def delete_posts(request, pk):
+     post = get_object_or_404(Blog, pk=pk)
+     post.delete() 
+     return redirect('blog_posts')

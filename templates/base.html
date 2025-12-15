@@ -16,7 +16,24 @@
   <div class="top-bar">
     <div class="container d-flex justify-content-between align-items-center">
       <a href="{% url 'home'%}" class="blog-name">World Stories</a>
+      
       <div>
+        
+        {% if request.user.is_authenticated %}
+
+        <div class="d-flex align-items-center gap-3">
+          {% comment %} <span>
+            <a href="{%url 'dashboard' %}">Dashboard</a>
+          </span> {% endcomment %}
+           <a href="{% url 'dashboard' %}"
+                    class="nav-link d-flex align-items-center gap-2 px-3 py-2 rounded
+                  text-dark fw-semibold
+                  {% if request.path == '/dashboard/' %}bg-warning text-dark active{% endif %}">
+            
+                    <i class="bi bi-speedometer2"></i>
+                    <span>Dashboard</span>
+             </a>
+          <div>
         <form action="{% url 'search'%}" method = "GET">
                     <div class="input-group">
                         <input class="form-control" type="text" placeholder="Enter search term..."  aria-label="Enter search term..." aria-describedby="button-search" name= "keyword" value= "{{keyword}}">
@@ -24,15 +41,6 @@
                     </div>
         </form>
       </div>
-      <div>
-        
-        {% if request.user.is_authenticated %}
-
-        <div class="d-flex align-items-center gap-3">
-          <span>
-            <a href="{%url 'dashboard' %}">Dashboard</a>
-          </span>
-           
           <a class="mb-0" style = "text-decoration:none; font-size:30px; font-family:italic; color:Black">{{ request.user.first_name }}</a>
       {% comment %} <a href="{%url 'profile'%}">
         <img 

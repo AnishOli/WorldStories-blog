@@ -3,6 +3,7 @@ from django.contrib.auth import get_user_model  # i used this because it can be 
 from django.db.models import UniqueConstraint
 from django.db.models.functions import Lower
 
+
 # Create your models here.
 # creating category model 
 class Category(models.Model):
@@ -46,8 +47,18 @@ class Blog(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
 
+    # def save(self, *args, **kwargs):
+    #     if not self.slug:
+    #         base_slug = slugify(self.title)
+    #         slug = base_slug
+    #         counter = 1
+    #         # Ensure uniqueness
+    #         while Blog.objects.filter(slug=slug).exists():
+    #             slug = f"{base_slug}-{counter}"
+    #             counter += 1
+    #         self.slug = slug
+    #     super().save(*args, **kwargs)
+
     def __str__(self):
         return self.title
-
-
 
