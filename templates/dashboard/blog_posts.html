@@ -1,0 +1,73 @@
+{% extends "base.html" %} {% block content %}
+<style>
+  @keyframes blink {
+    0% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.3;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  .nav-link.blink-hover:hover {
+    animation: blink 0.6s infinite;
+  }
+</style>
+
+<div class="container mt-3">
+  <!-- IMPORTANT -->
+
+  <div class="row">
+    <!-- Left Sidebar -->
+    <!-- Load this side bar here-->
+
+    {% include 'dashboard/sidebar.html' %}
+
+    <!-- Right Side -->
+    <div class="col-md-9">
+      <h2><center>All Posts</center></h2>
+        <div class="d-flex">
+          <a href="{% url  'add_posts'%}" class="btn btn-primary text-light mb-2 ms-auto"><i class="fas fa-edit text-light"></i>  Add New</a>
+        </div>
+    
+      <div class="row">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col">S.N</th>
+              <th scope="col">Title</th>
+              <th scope="col">Category</th>
+              <th scope="col">Author</th>
+              <th scope= "col">status</th>
+              <th scope="col">Featured</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- We have context processor and we can take category from there-->
+            {% for post in posts  %}
+            <tr>
+              <th scope="row">{{forloop.counter}}</th>
+              <td>{{post.title}}</td>
+              <td>{{post.category}}</td>
+              <td>{{post.author}}</td>
+              <td>{{post.status}}</td>
+              <td>{{post.is_featured}}</td>
+              <td>
+                <a href="#"> <i class="fas fa-edit text-success"></i></a>
+                &nbsp; 
+                <a href="#"><i class="fas fa-trash text-danger"></i></a>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  {% endblock content %}
+</div>

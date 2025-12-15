@@ -6,7 +6,10 @@ from django.contrib.auth.decorators import login_required
 
 from accounts.views import user_login
 from blogs.models import Blog, Category
-from dashboard.forms import CategoryForm
+from dashboard.forms import BlogPostForm, CategoryForm
+from django.utils.text import slugify
+
+
 
 # Create your views here.
 @login_required (login_url= user_login)
@@ -82,3 +85,38 @@ def delete_category(request, pk):
      category = get_object_or_404(Category, pk=pk)
      category.delete()
      return redirect('categories')
+
+
+
+
+# for blog
+
+def blog_posts(request):
+     posts= Blog.objects.all()
+     context= {
+          'posts':posts,
+          'hide_categories':True
+     }
+     return render(request, 'dashboard/blog_posts.html',context)
+
+def add_posts(request):
+     if request.method == "POST":
+        form = BlogPostForm(request.POST,request.FILES)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.author = request.user 
+            # post.slug = slugify(post.title)  
+            post.save()
+            messages.success(request, "Blogs added successfully!")
+            return redirect('blog_posts')
+        # else:
+        #      print("Error")
+        #      print(form.errors)
+     else:
+        form = BlogPostForm()
+     context= {
+          'form': form,
+          'hide_categories': True,
+     }
+     return render(request, "dashboard/add_posts.html", context)
+    

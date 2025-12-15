@@ -9,7 +9,7 @@ from blogs.models import Category
 # @login_required(login_url=login)
 def get_categories(request):
     view_name = resolve(request.path_info).url_name
-    if view_name in ['home', 'posts_by_category','blogs','search','register', 'login','categories',]:  # only for these views we will write here where we need it 
+    if view_name in ['home', 'posts_by_category','blogs','search','register', 'login','categories','blog_posts']:  # only for these views we will write here where we need it 
         categories = Category.objects.all()
         return {'categories': categories}
     return {}
